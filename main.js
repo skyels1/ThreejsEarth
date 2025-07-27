@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import Background from 'three/src/renderers/common/Background.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -13,9 +14,7 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
     const loader = new THREE.TextureLoader();
      
 
-    loader.load('images/backgrounds/clouds.jpg', function(texture) {
-    scene.background = texture;
-    });
+    loader.load('images/backgrounds/clouds.jpg', function(texture) { scene.background = texture; });
 
     const materials = [
       new THREE.MeshBasicMaterial({map: loadColorTexture('images/blue.png')}),
@@ -37,6 +36,7 @@ scene.add( cube );
 
 camera.position.z = 5;
 
+//scene.background = new THREE.Color( 0xb5938b );
 
 function animate() {
 
