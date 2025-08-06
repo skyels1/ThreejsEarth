@@ -35,7 +35,7 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
 //scene.add( cube );
 
 const geometryS = new THREE.SphereGeometry(15,32,16);
-const material = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/earth2.jpg')});
+const material = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/earth3.jpg')});
 
 const sphere = new THREE.Mesh(geometryS,material);
 
