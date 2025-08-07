@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-//import Background from 'three/src/renderers/common/Background.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -13,6 +12,20 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
 
     const loader = new THREE.TextureLoader();
      
+
+    const colorMap = loader.load('images/backgrounds/earth.jpg');
+    const displacement = loader.load('images/backgrounds/earthhm.jpg');
+
+    colorMap.colorSpace = THREE.SRGBColorSpace;
+
+    const materialhm = new THREE.MeshStandardMaterial({
+      map: colorMap,
+      displacementMap: displacement,
+      displacementScale: 3,
+      roughness: 1,
+      metalness: 0
+    })
+
 
     loader.load('images/backgrounds/space2.jpg', function(texture) { texture.colorSpace = THREE.SRGBColorSpace; scene.background = texture; });
 
@@ -34,14 +47,19 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
 
 //scene.add( cube );
 
-const geometryS = new THREE.SphereGeometry(15,32,16);
+const geometryS = new THREE.SphereGeometry(15,256,256);
 const material = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/earth3.jpg')});
 
-const sphere = new THREE.Mesh(geometryS,material);
+const sphere = new THREE.Mesh(geometryS,materialhm);
 
 scene.add( sphere );
 
 camera.position.z = 40;
+
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(30,30,30);
+scene.add(light);
+scene.add(new THREE.AmbientLight(0x404040));
 
 //scene.background = new THREE.Color( 0xb5938b );
 
@@ -50,8 +68,8 @@ function animate() {
     cube.rotation.x += 0.009;
     cube.rotation.y += 0.003;
 
-    sphere.rotation.x += 0.009;
-    sphere.rotation.y += 0.003;
+    sphere.rotation.x += 0.006;
+    sphere.rotation.y += 0.002;
 
     renderer.render( scene, camera );
 }
