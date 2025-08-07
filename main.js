@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import { EffectComposer } from 'three/examples/jsm/Addons.js';
+import { RenderPass } from 'three/examples/jsm/Addons.js';
+import { UnrealBloomPass } from 'three/examples/jsm/Addons.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -7,6 +10,25 @@ const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.inner
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
+
+
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),2,1,0.75);
+composer.addPass(bloomPass);
+
+const atmosphereMaterial = new THREE.MeshBasicMaterial({
+  color: 0x88ccff,
+  side: THREE.BackSide,
+  transparent: true,
+  opacity: 0.6,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false
+});
 
 const geometry = new THREE.BoxGeometry( 2, 2, 2 );
 
@@ -53,9 +75,9 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
 
 
 //sphere stuff
-const geometryS = new THREE.SphereGeometry(15,256,256);
-const geometrySC = new THREE.SphereGeometry(15.8,32,32);
-const geometrySpace = new THREE.SphereGeometry(50,256,256);
+const geometryS = new THREE.SphereGeometry(15,256,256); // earth
+const geometrySC = new THREE.SphereGeometry(15.8,32,32); // clouds
+const geometrySpace = new THREE.SphereGeometry(100,256,256); // space sphere
 //const material = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/earth3.jpg')});
 const materialSpace = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/stars.jpg'),transparent: true, side: THREE.DoubleSide});
 const cloudsMat = new THREE.MeshLambertMaterial({
@@ -65,16 +87,20 @@ const cloudsMat = new THREE.MeshLambertMaterial({
   opacity: 0.7
 });
 
+const atmosphereGeometry = new THREE.SphereGeometry(15.5, 128, 128); // slightly larger than Earth
+const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+scene.add(atmosphere);
+
 
 const sphere = new THREE.Mesh(geometryS,materialhm);
 const sphere2 = new THREE.Mesh(geometrySC,cloudsMat);
 const sphere3 = new THREE.Mesh(geometrySpace,materialSpace);
 
-scene.add( sphere );
-scene.add( sphere2 );
+scene.add( sphere );  // earth
+scene.add( sphere2 ); // clouds
 scene.add( sphere3 ); // space but sphere
 
-camera.position.z = 35;
+camera.position.z = 40;
 
 
 // lighting for the scene
@@ -88,8 +114,8 @@ scene.add(new THREE.AmbientLight(0x404040, 4));
 
 //controlls to move and zoom
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.minDistance = 18;
-controls.maxDistance = 50;
+controls.minDistance = 17;
+controls.maxDistance = 75;
 controls.mouseButtons.RIGHT = false;
 controls.rotateSpeed = 0.3;
 
@@ -116,7 +142,7 @@ function animate() {
 
     controls.update();
 
-    renderer.render( scene, camera );
+    composer.render();
 }
 
 renderer.setAnimationLoop( animate );
