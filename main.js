@@ -28,9 +28,8 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
       metalness: 0
     })
 
-
     // wallpaper in the background
-    loader.load('images/backgrounds/space2.jpg', function(texture) { texture.colorSpace = THREE.SRGBColorSpace; scene.background = texture; });
+    //loader.load('images/backgrounds/stars.jpg', function(texture) { texture.colorSpace = THREE.SRGBColorSpace; scene.background = texture; });
 
 
     //texture for the rubix cube
@@ -55,10 +54,10 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
 
 //sphere stuff
 const geometryS = new THREE.SphereGeometry(15,256,256);
-const geometrySC = new THREE.SphereGeometry(16.3,32,32);
+const geometrySC = new THREE.SphereGeometry(15.8,32,32);
 const geometrySpace = new THREE.SphereGeometry(50,256,256);
-const material = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/earth3.jpg')});
-const materialSpace = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/space2.jpg'),transparent: true, side: THREE.DoubleSide });
+//const material = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/earth3.jpg')});
+const materialSpace = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/stars.jpg'),transparent: true, side: THREE.DoubleSide});
 const cloudsMat = new THREE.MeshLambertMaterial({
   map: loadColorTexture('images/backgrounds/cloudser.png'), 
   transparent: true, 
@@ -66,15 +65,16 @@ const cloudsMat = new THREE.MeshLambertMaterial({
   opacity: 0.7
 });
 
+
 const sphere = new THREE.Mesh(geometryS,materialhm);
 const sphere2 = new THREE.Mesh(geometrySC,cloudsMat);
 const sphere3 = new THREE.Mesh(geometrySpace,materialSpace);
 
 scene.add( sphere );
 scene.add( sphere2 );
-//scene.add( sphere3 ); // space but sphere
+scene.add( sphere3 ); // space but sphere
 
-camera.position.z = 40;
+camera.position.z = 35;
 
 
 // lighting for the scene
@@ -83,13 +83,15 @@ light.position.set(30,30,30);
 scene.add(light);
 scene.add(new THREE.AmbientLight(0x404040, 4));
 
-//scene.background = new THREE.Color( 0xb5938b );
+//scene.background = new THREE.Color( 0x279ff5 );
 
 
 //controlls to move and zoom
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.minDistance = 18;
-controls.maxDistance = 100
+controls.maxDistance = 50;
+controls.mouseButtons.RIGHT = false;
+controls.rotateSpeed = 0.3;
 
 
 // remove the weird drag click select picture thing
@@ -100,11 +102,17 @@ renderer.domElement.addEventListener('dragstart', function (event) {
 
 function animate() {
 
-    cube.rotation.x += 0.009;
-    cube.rotation.y += 0.003;
+    //cube.rotation.x += 0.009;
+    //cube.rotation.y += 0.003;
+
+    //sphere.rotation.x += 0.0003;
+    sphere.rotation.y -= 0.0003; // earth
 
     //sphere2.rotation.x += 0.0003;
-    sphere2.rotation.y += 0.0003;
+    sphere2.rotation.y += 0.0003; // clouds
+
+    //sphere3.rotation.x += 0.0003;
+    sphere3.rotation.y += 0.0003; // stars
 
     controls.update();
 
