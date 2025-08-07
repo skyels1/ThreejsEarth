@@ -13,7 +13,7 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
     const loader = new THREE.TextureLoader();
      
 
-    const colorMap = loader.load('images/backgrounds/earth.jpg');
+    const colorMap = loader.load('images/backgrounds/earth3.jpg');
     const displacement = loader.load('images/backgrounds/earthhm.jpg');
 
     colorMap.colorSpace = THREE.SRGBColorSpace;
@@ -56,10 +56,10 @@ scene.add( sphere );
 
 camera.position.z = 40;
 
-const light = new THREE.DirectionalLight(0xffffff, 1);
+const light = new THREE.DirectionalLight(0xffffff, 4);
 light.position.set(30,30,30);
 scene.add(light);
-scene.add(new THREE.AmbientLight(0x404040));
+scene.add(new THREE.AmbientLight(0x404040, 4));
 
 //scene.background = new THREE.Color( 0xb5938b );
 
