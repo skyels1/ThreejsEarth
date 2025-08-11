@@ -4,12 +4,12 @@ this project is just learning threejs (first threejs project)
 
 project uses vite and threejs, that is all.
 
-### branches 
-main: obviously where i am actaully working on things ie, the earth...
+### branches (what it was used to learn in brackets on side)
+main: obviously where i am actaully working on things ie, the earth... (learning how to texture and use heightmaps/ displacement maps)
 ![image of the earth from website](/previews/earthwebsite.png)
-SolarSystem: this is with sun and moon with fake orbits as a little fun project
+SolarSystem: this is with sun and moon with fake orbits as a little fun project (learning how to have multiple objects and have parents for others)
 ![image of the solar system from website](/previews/solarsystem.png)
-RubiksCube: this is first threejs project roughly i just reverted so some stuff is different
+RubiksCube: this is first threejs project roughly i just reverted so some stuff is different (basic cube but with 6 different photos for sides)
 ![image of rubiks cube from website](/previews/rubikscube.png)
 
 
