@@ -1,10 +1,16 @@
-## Threejs-Earth
+# ThreejsEarth
+### installation & info
+to use the site just git clone the repo and then do 
+``` npm i ```
+in root and then 
+``` npx vite ```
+to run the site. (site needs vite installed)
 
 this project is just learning threejs (first threejs project)
 
 project uses vite and threejs, that is all.
 
-### branches (what it was used to learn in brackets on side)
+## branches (what it was used to learn in brackets on side)
 main: obviously where i am actaully working on things ie, the earth... (learning how to texture and use heightmaps/ displacement maps)
 ![image of the earth from website](/previews/earthwebsite.png)
 SolarSystem: this is with sun and moon with fake orbits as a little fun project (learning how to have multiple objects and have parents for others)
