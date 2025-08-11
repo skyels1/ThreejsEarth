@@ -18,7 +18,7 @@ composer.addPass(renderPass);
 
 
 const bloomPass = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight),2,1,0.75);
+  new THREE.Vector2(window.innerWidth, window.innerHeight),5,1,2);
 composer.addPass(bloomPass);
 
 const atmosphereMaterial = new THREE.MeshBasicMaterial({
@@ -83,8 +83,8 @@ const materialSpace = new THREE.MeshBasicMaterial({map: loadColorTexture('images
 const cloudsMat = new THREE.MeshLambertMaterial({
   map: loadColorTexture('images/backgrounds/cloudser.png'), 
   transparent: true, 
-  side: THREE.DoubleSide, 
-  opacity: 0.7
+  opacity: 0.6,
+  side: THREE.DoubleSide
 });
 
 const atmosphereGeometry = new THREE.SphereGeometry(15.5, 128, 128); // slightly larger than Earth
@@ -124,6 +124,19 @@ controls.rotateSpeed = 0.3;
 renderer.domElement.addEventListener('dragstart', function (event) {
   event.preventDefault();
 });
+
+
+// fit screen when resizing the tab
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
 
 
 function animate() {
