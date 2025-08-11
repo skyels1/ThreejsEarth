@@ -40,6 +40,13 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
     const colorMap = loader.load('images/backgrounds/earthhrnc2.jpg');
     const displacement = loader.load('images/backgrounds/earthhm3.jpg');
 
+    const colorMapM = loader.load('images/backgrounds/moon.jpg');
+    const displacementM = loader.load('images/backgrounds/moonhm.jpg');
+
+    const colorMapS = loader.load('images/backgrounds/sun.jpg');
+    const displacementS = loader.load('images/backgrounds/sunhm.jpg');
+
+
     colorMap.colorSpace = THREE.SRGBColorSpace;
 
     const materialhm = new THREE.MeshStandardMaterial({
@@ -48,6 +55,23 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
       displacementScale: 2,
       roughness: 1,
       metalness: 0
+    })
+    const materialMhm = new THREE.MeshStandardMaterial({
+      map: colorMapM,
+      displacementMap: displacementM,
+      displacementScale: 0.1,
+      roughness: 1,
+      metalness: 0
+    })
+    const materialShm = new THREE.MeshStandardMaterial({
+      map: colorMapS,
+      displacementMap: displacementS,
+      displacementScale: 5,
+      roughness: 1,
+      metalness: 0,
+      opacity: 0.99,
+      transparent: true,
+      side: THREE.DoubleSide
     })
 
     // wallpaper in the background
@@ -76,10 +100,15 @@ const geometry = new THREE.BoxGeometry( 2, 2, 2 );
 
 //sphere stuff
 const geometryS = new THREE.SphereGeometry(15,256,256); // earth
+const geometrySM = new THREE.SphereGeometry(4,256,256); // moon
+const geometrySS = new THREE.SphereGeometry(30,256,256); // sun
 const geometrySC = new THREE.SphereGeometry(15.8,32,32); // clouds
-const geometrySpace = new THREE.SphereGeometry(100,256,256); // space sphere
+//const geometrySA = new THREE.SphereGeometry(15.9,32,32); // atmosphere
+const geometrySpace = new THREE.SphereGeometry(200,256,256); // space sphere
 //const material = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/earth3.jpg')});
 const materialSpace = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/stars.jpg'),transparent: true, side: THREE.DoubleSide});
+//const materialMoon = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/moon.jpg')});
+//const materialA = new THREE.MeshBasicMaterial({color: (0x252ba1), transparent: true, opacity: 0.5});
 const cloudsMat = new THREE.MeshLambertMaterial({
   map: loadColorTexture('images/backgrounds/cloudser.png'), 
   transparent: true, 
@@ -87,27 +116,38 @@ const cloudsMat = new THREE.MeshLambertMaterial({
   side: THREE.DoubleSide
 });
 
-const atmosphereGeometry = new THREE.SphereGeometry(15.5, 128, 128); // slightly larger than Earth
+const atmosphereGeometry = new THREE.SphereGeometry(15.5, 128, 128);
 const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-scene.add(atmosphere);
+
 
 
 const sphere = new THREE.Mesh(geometryS,materialhm);
 const sphere2 = new THREE.Mesh(geometrySC,cloudsMat);
 const sphere3 = new THREE.Mesh(geometrySpace,materialSpace);
+const moon = new THREE.Mesh(geometrySM,materialMhm);
+const sun = new THREE.Mesh(geometrySS,materialShm);
+//const sphere4 = new THREE.Mesh(geometrySA,materialA);
 
-scene.add( sphere );  // earth
-scene.add( sphere2 ); // clouds
+scene.add(sun);
+sun.add( sphere );  // earth
+sphere.add( sphere2 ); // clouds
 scene.add( sphere3 ); // space but sphere
+//scene.add( sphere4 ); // atmosphere
+sphere.add(moon);
+sphere.add(atmosphere);
 
-camera.position.z = 40;
+camera.position.z = 75;
+
+sphere.position.z = -80;
+
+moon.position.z = -30;
 
 
 // lighting for the scene
-const light = new THREE.DirectionalLight(0xffffff, 4);
-light.position.set(30,30,30);
+const light = new THREE.DirectionalLight(0xffffff, 50);
+light.position.set(sun);
 scene.add(light);
-scene.add(new THREE.AmbientLight(0x404040, 4));
+scene.add(new THREE.AmbientLight(0x404040, 50));
 
 //scene.background = new THREE.Color( 0x279ff5 );
 
@@ -115,9 +155,11 @@ scene.add(new THREE.AmbientLight(0x404040, 4));
 //controlls to move and zoom
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.minDistance = 17;
-controls.maxDistance = 75;
+controls.maxDistance = 150;
 controls.mouseButtons.RIGHT = false;
 controls.rotateSpeed = 0.3;
+//controls.mouseButtons.MIDDLE = false;
+//controls.mouseButtons.RIGHT = THREE.MOUSE.DOLLY;
 
 
 // remove the weird drag click select picture thing
@@ -138,7 +180,6 @@ function onWindowResize(){
 
 }
 
-
 function animate() {
 
     //cube.rotation.x += 0.009;
@@ -151,7 +192,11 @@ function animate() {
     sphere2.rotation.y += 0.0003; // clouds
 
     //sphere3.rotation.x += 0.0003;
-    sphere3.rotation.y += 0.0003; // stars
+    //sphere3.rotation.y += 0.0003; // stars
+
+    moon.rotation.y -= 0.0003; // moon
+
+    sun.rotation.y -= 0.0003; // sun
 
     controls.update();
 
