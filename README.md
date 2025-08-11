@@ -1,0 +1,29 @@
+## Threejs-Earth
+
+this project is just learning threejs (first threejs project)
+
+project uses vite and threejs, that is all.
+
+### branches 
+main: obviously where i am actaully working on things ie, the earth...
+![image of the earth from website](/previews/earthwebsite.png)
+solar-system: this is with sun and moon with fake orbits as a little fun project
+![image of the solar system from website](/previews/solarsystem.png)
+rubiks-cube: this is first threejs project roughly i just reverted so some stuff is different
+![image of rubiks cube from website](/previews/rubikscube.png)
+
+
+## images used for textures and other
+
+moon texture - https://uk.pinterest.com/pin/354728908125325458/
+moon heightmap - https://sbcode.net/topoearth/moon-heightmap/
+
+sun texture - https://www.solarsystemscope.com/textures/
+sun heightmap - https://www.reddit.com/r/proceduralgeneration/comments/130lcn6/i_made_a_heightmap_generator_that_could_create/
+
+earth texture - https://www.shadedrelief.com/natural3/pages/textures.html
+earth heightmap - https://www.shadedrelief.com/natural3/pages/textures.html
+
+stars - https://4kwallpapers.com/space/stars-galaxy-10307.html
+
+rubiks cube sides - https://mzrg.com/rubik/mech.shtml
