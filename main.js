@@ -156,7 +156,7 @@ scene.add(new THREE.AmbientLight(0x404040, 50));
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.minDistance = 17;
 controls.maxDistance = 150;
-controls.mouseButtons.RIGHT = false;
+//controls.mouseButtons.RIGHT = false;
 controls.rotateSpeed = 0.3;
 //controls.mouseButtons.MIDDLE = false;
 //controls.mouseButtons.RIGHT = THREE.MOUSE.DOLLY;
