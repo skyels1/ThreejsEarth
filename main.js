@@ -81,8 +81,9 @@ const geometrySpace = new THREE.SphereGeometry(100,256,256); // space sphere
 //const material = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/earth3.jpg')});
 const materialSpace = new THREE.MeshBasicMaterial({map: loadColorTexture('images/backgrounds/stars.jpg'),transparent: true, side: THREE.DoubleSide});
 const cloudsMat = new THREE.MeshLambertMaterial({
-  map: loadColorTexture('images/backgrounds/cloudser.png'), 
-  transparent: true, 
+  map: loadColorTexture('images/backgrounds/cloudser.jpg'), 
+  alphaMap: loadColorTexture('images/backgrounds/cloudser.jpg'),
+  transparent: true,
   opacity: 0.6,
   side: THREE.DoubleSide
 });
