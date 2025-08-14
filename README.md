@@ -30,6 +30,6 @@ sun heightmap - https://www.reddit.com/r/proceduralgeneration/comments/130lcn6/i
 earth texture - https://www.shadedrelief.com/natural3/pages/textures.html
 earth heightmap - https://www.shadedrelief.com/natural3/pages/textures.html
 
-stars - https://4kwallpapers.com/space/stars-galaxy-10307.html
+stars - https://4kwallpapers.com/space/stars-galaxy-10307.html // https://www.deviantart.com/ivycomb/art/100-Royalty-Free-Stars-Texture-522155007
 
 rubiks cube sides - https://mzrg.com/rubik/mech.shtml
