@@ -10,6 +10,10 @@ this project is just learning threejs (first threejs project)
 
 project uses vite and threejs, that is all.
 
+## gif of site (low quality to save space)
+
+![image of the earth from website](/previews/earth.gif)
+
 ## branches (what it was used to learn in brackets on side)
 main: obviously where i am actaully working on things ie, the earth... (learning how to texture and use heightmaps/ displacement maps)
 ![image of the earth from website](/previews/earth1.1.png)
