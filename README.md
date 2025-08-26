@@ -22,6 +22,12 @@ SolarSystem: this is with sun and moon with fake orbits as a little fun project 
 RubiksCube: this is first threejs project roughly i just reverted so some stuff is different (basic cube but with 6 different photos for sides)
 ![image of rubiks cube from website](/previews/rubikscube.png)
 
+## plans for future
+
+- [ ] create stars that arent a texture on a sphere
+- [ ] random noise generation for planet and clouds (also for textures)
+- [ ] fix the atmosphere and make it more accurate (currently breaks because of the space sphere)
+- [ ] add oceans that are not just texture (after adding noise for random planets)
 
 ## images used for textures and other
 
